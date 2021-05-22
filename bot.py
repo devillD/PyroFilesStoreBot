@@ -49,10 +49,6 @@ async def start(bot: Client, cmd: Message):
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton("Support Group", url="https://t.me/linux_repo"),
-                        InlineKeyboardButton("Bots Channel", url="https://t.me/Discovery_Updates")
-                    ],
-                    [
                         InlineKeyboardButton("About Bot", callback_data="aboutbot"),
                         InlineKeyboardButton("About Dev", callback_data="aboutdevs")
                     ]
@@ -76,7 +72,7 @@ async def start(bot: Client, cmd: Message):
                 send_stored_file = await bot.forward_messages(chat_id=cmd.from_user.id, from_chat_id=Config.DB_CHANNEL,
                                                               message_ids=file_id)
             await send_stored_file.reply_text(
-                f"**Here is Sharable Link of this file:** https://t.me/{Config.BOT_USERNAME}?start=AbirHasan2005_{file_id}\n\n__To Retrive the Stored File, just open the link!__",
+                f"**Here is Sharable Link of this file:** https://t.me/{Config.BOT_USERNAME}?start={file_id}\n\n__To Retrive the Stored File, just open the link!__",
                 disable_web_page_preview=True, quote=True)
         except Exception as err:
             await cmd.reply_text(f"Something went wrong!\n\n**Error:** `{err}`")
@@ -99,7 +95,7 @@ async def main(bot: Client, message: Message):
             else:
                 pass
         if message.from_user.id in Config.BANNED_USERS:
-            await message.reply_text("Sorry, You are banned!\n\nContact [Support Group](https://t.me/linux_repo)",
+            await message.reply_text("Sorry, You are banned!\n\nContact [Developer](https://t.me/unkusr)",
                                      disable_web_page_preview=True)
             return
         if Config.OTHER_USERS_CAN_SAVE_FILE is False:
@@ -111,14 +107,12 @@ async def main(bot: Client, message: Message):
             await forwarded_msg.reply_text(
                 f"#PRIVATE_FILE:\n\n[{message.from_user.first_name}](tg://user?id={message.from_user.id}) Got File Link!",
                 parse_mode="Markdown", disable_web_page_preview=True)
-            share_link = f"https://t.me/{Config.BOT_USERNAME}?start=AbirHasan2005_{file_er_id}"
+            share_link = f"https://t.me/{Config.BOT_USERNAME}?start={file_er_id}"
             await editable.edit(
                 f"**Your File Stored in my Database!**\n\nHere is the Permanent Link of your file: {share_link} \n\nJust Click the link to get your file!",
                 parse_mode="Markdown",
                 reply_markup=InlineKeyboardMarkup(
-                    [[InlineKeyboardButton("Open Link", url=share_link)],
-                     [InlineKeyboardButton("Bots Channel", url="https://t.me/Discovery_Updates"),
-                      InlineKeyboardButton("Support Group", url="https://t.me/linux_repo")]]
+                    [[InlineKeyboardButton("Open Link", url=share_link)]]
                 ),
                 disable_web_page_preview=True
             )
@@ -159,7 +153,7 @@ async def main(bot: Client, message: Message):
         try:
             forwarded_msg = await message.forward(Config.DB_CHANNEL)
             file_er_id = forwarded_msg.message_id
-            share_link = f"https://t.me/{Config.BOT_USERNAME}?start=AbirHasan2005_{file_er_id}"
+            share_link = f"https://t.me/{Config.BOT_USERNAME}?start={file_er_id}"
             CH_edit = await bot.edit_message_reply_markup(message.chat.id, message.message_id,
                                                           reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(
                                                               "Get Sharable Stored Link", url=share_link)]]))
@@ -302,7 +296,7 @@ async def button(bot: Client, cmd: CallbackQuery):
                 [
                     [
                         InlineKeyboardButton("Source Codes of Bot",
-                                             url="https://github.com/AbirHasan2005/PyroFilesStoreBot")
+                                             url="https://github.com/devillD/PyroFilesStoreBot")
                     ],
                     [
                         InlineKeyboardButton("Go Home", callback_data="gotohome"),
@@ -320,7 +314,7 @@ async def button(bot: Client, cmd: CallbackQuery):
                 [
                     [
                         InlineKeyboardButton("Source Codes of Bot",
-                                             url="https://github.com/AbirHasan2005/PyroFilesStoreBot")
+                                             url="https://github.com/devillD/PyroFilesStoreBot")
                     ],
                     [
                         InlineKeyboardButton("About Bot", callback_data="aboutbot"),
@@ -336,10 +330,6 @@ async def button(bot: Client, cmd: CallbackQuery):
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [
-                    [
-                        InlineKeyboardButton("Support Group", url="https://t.me/linux_repo"),
-                        InlineKeyboardButton("Bots Channel", url="https://t.me/Discovery_Updates")
-                    ],
                     [
                         InlineKeyboardButton("About Bot", callback_data="aboutbot"),
                         InlineKeyboardButton("About Dev", callback_data="aboutdevs")
@@ -388,10 +378,6 @@ async def button(bot: Client, cmd: CallbackQuery):
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [
-                    [
-                        InlineKeyboardButton("Support Group", url="https://t.me/linux_repo"),
-                        InlineKeyboardButton("Bots Channel", url="https://t.me/Discovery_Updates")
-                    ],
                     [
                         InlineKeyboardButton("About Bot", callback_data="aboutbot"),
                         InlineKeyboardButton("About Dev", callback_data="aboutdevs")
