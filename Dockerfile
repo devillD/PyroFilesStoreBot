@@ -9,10 +9,13 @@ RUN apt -qq update
 ENV TZ Asia/Dhaka
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN add-apt-repository -y ppa:deadsnakes/ppa
-RUN ap -qq update
+RUN apt -qq install -y python3 python3-pip
 
-RUN apt -qq install -y python3.6 python3-pip
+RUN apt-get install -y software-properties-common
+RUN apt-get -y update
+
+RUN add-apt-repository -y ppa:deadsnakes/ppa
+RUN apt install -y python3.6
 
 COPY requirements.txt .
 RUN pip3 install --no-cache-dir -r requirements.txt
