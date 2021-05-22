@@ -1,24 +1,24 @@
-FROM python:3-slim-buster AS base
+FROM ubuntu:20.04
 
-WORKDIR /FileAi
+WORKDIR /FilesDB
 
-RUN chmod -R 777 /FileAi
+RUN chmod -R 777 /FilesDB
 
-# Export ARGs as ENV vars so they can be shared among steps
-ENV DEBIAN_FRONTEND=noninteractive \
-    APT_OPTS="-q=2 --yes"
+RUN apt -qq update
 
-FROM base AS builder-deps
-# Install build dependencies
-RUN apt ${APT_OPTS} update && \
-    apt ${APT_OPTS} --no-install-recommends install apt-utils && \
-    apt ${APT_OPTS} --no-install-recommends install \
-      python3 \
-      python3-pip
+ENV TZ Asia/Dhaka
+ENV DEBIAN_FRONTEND noninteractive
 
-FROM builder-deps AS builder
+RUN add-apt-repository -y ppa:deadsnakes/ppa
+RUN ap -qq update
+
+RUN apt -qq install -y python3.6 python3-pip
+
 COPY requirements.txt .
 RUN pip3 install --no-cache-dir -r requirements.txt
 
 COPY . .
-CMD ["bash","start.sh"]
+
+RUN useradd -ms /bin/bash unkusr
+USER unkusr
+CMD ./start.sh
