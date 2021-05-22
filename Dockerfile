@@ -26,5 +26,5 @@ RUN chmod 777 start.sh
 
 RUN useradd -ms /bin/bash unkusr
 USER unkusr
-RUN python3 --version
+RUN python3.6 --version
 CMD ./start.sh
