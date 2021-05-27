@@ -1,2 +1,3 @@
 build:
-  worker: bash start.sh
+ docker:
+  worker: Dockerfile
